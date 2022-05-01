@@ -46,7 +46,7 @@
     <input id="capturedValues" type="text" disabled />
 </div>
 <script src="openseadragon/openseadragon.min.js"></script>
-<script src="PatchworkVisualizer.js"></script>
+<script src="PatchworkVisualizer.js?v=1"></script>
 <script type="text/javascript">
     function source(author, name, x=0, y=0, width=1,rotation=0,opacity=1 ){
         return { author, name, x, y, width, rotation, opacity }
@@ -60,9 +60,10 @@
     var visualizer = PatchworkVisualizer({
         viewer,
         isDebug:(new URL(location.href).searchParams.get("debug")==='true'),
+        showRgbToggle:false,
         sources: [
             source('JonathanMacCollum','MainImage',0,0,1,0,1),
-            source('PixInsight','Annotated',0,0,1,0,1)
+            source('PixInsight','Annotated',0,0,1,0,0)
         ]
     });
     function cycleTargets(){

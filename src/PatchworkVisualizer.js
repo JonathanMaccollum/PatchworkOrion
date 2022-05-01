@@ -3,6 +3,7 @@ function PatchworkVisualizer(
 ){
     var viewer=options.viewer;
     var isDebug=options.isDebug;
+    var showRgbToggle = options.showRgbToggle;
     var sources=options.sources;
     this.getSource=function(author,name){
         var result= sources.findIndex(e=> e.author === author && e.name === name);
@@ -152,7 +153,7 @@ function PatchworkVisualizer(
             }
         });
     }
-    if(!isDebug){
+    if(!isDebug && showRgbToggle){
         
         function toggleRGBMode(){
             var index=1;
