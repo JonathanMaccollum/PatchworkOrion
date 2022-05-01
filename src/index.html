@@ -1,0 +1,83 @@
+<html style="height:100%; position:relative">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Orion Mosaic" />
+    <meta name="twitter:description" content="A Deep Zoom view of the Orion Region" />
+    <meta property="og:title" content="Orion Mosaic" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://www.darkflats.com/PatchworkOrion/v1/Thumbnails/PatchworkCygnus.Thumbnail.20220417.jpeg" />
+    <style>
+        body {background:black; min-height:100%;}
+        #openseadragon1{position:absolute; top:10;bottom:10;left:10;right:10;overflow:hidden;}
+        #editor{position:absolute; bottom:10;right:10;overflow:hidden; background-color:#333333DD; padding:4px; display:none;}
+        label{width:100px; display:inline-block; text-align: right;}
+    </style>
+</head>
+<body >
+<div id="openseadragon1"></div>
+<div id="editor">
+    <label for="tiles">Target: </label>
+    <select id="tiles"></select>
+    <br />
+    <label for="x" >X: </label>
+    <input id="x" type="text" width="140px" />
+    <br />
+    <label for="y" >Y: </label>
+    <input id="y" type="text" width="140px"/>
+    <br />
+    <label for="scale" >Scale: </label>
+    <input id="scale" type="text" width="140px"/>
+    <br />
+    <label for="rotation" >Rotation: </label>
+    <input id="rotation" type="text" width="140px"/>
+    <br />
+    <label for="opacity" >Opacity: </label>
+    <input id="opacity" type="text" width="140px"/>
+    <br />
+    <label for="update" >Update: </label>
+    <input id="update" type="button" value="Update" />
+    <input id="hide" type="button" value="Hide" />
+    <input id="dim" type="button" value="Dim" />
+    <input id="show" type="button" value="Show" />
+    <br />
+    <label for="capturedValues" >Values: </label>
+    <input id="capturedValues" type="text" disabled />
+</div>
+<script src="openseadragon/openseadragon.min.js"></script>
+<script src="PatchworkVisualizer.js"></script>
+<script type="text/javascript">
+    function source(author, name, x=0, y=0, width=1,rotation=0,opacity=1 ){
+        return { author, name, x, y, width, rotation, opacity }
+    }
+    var viewer = OpenSeadragon({
+        id: "openseadragon1",
+        prefixUrl: "openseadragon/images/",
+        showNavigator:  true
+    });
+    var rotateIntervalMs=10000
+    var visualizer = PatchworkVisualizer({
+        viewer,
+        isDebug:(new URL(location.href).searchParams.get("debug")==='true'),
+        sources: [
+            source('PixInsight','Stars',0,0,1,0,1),
+            source('PixInsight','Annotated',0,0,1,0,1)
+        ]
+    });
+    function cycleTargets(){
+        visualizer.swapTargets([
+
+        ]);
+    }
+    var swapInterval = window.setInterval(cycleTargets,rotateIntervalMs);
+    visualizer.onKeyUp("n",()=>{
+        cycleTargets();
+            window.clearInterval(swapInterval);
+            swapInterval = window.setInterval(cycleTargets,rotateIntervalMs);
+        });
+
+    visualizer.startImageLoad();
+</script>
+</body>
+</html>
