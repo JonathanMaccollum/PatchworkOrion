@@ -7,7 +7,7 @@
     <meta name="twitter:description" content="A Deep Zoom view of the Orion Region" />
     <meta property="og:title" content="Orion Mosaic" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://www.darkflats.com/PatchworkOrion/v1/Thumbnails/PatchworkCygnus.Thumbnail.20220417.jpeg" />
+    <meta property="og:image" content="https://www.darkflats.com/OrionMosaic/v1/Thumbnails/Orion Mosaic.ThreePanel.204x3m.195x3m.178x3m.Thumb.jpg" />
     <style>
         body {background:black; min-height:100%;}
         #openseadragon1{position:absolute; top:10;bottom:10;left:10;right:10;overflow:hidden;}
@@ -61,7 +61,7 @@
         viewer,
         isDebug:(new URL(location.href).searchParams.get("debug")==='true'),
         sources: [
-            source('PixInsight','Stars',0,0,1,0,1),
+            source('JonathanMacCollum','MainImage',0,0,1,0,1),
             source('PixInsight','Annotated',0,0,1,0,1)
         ]
     });

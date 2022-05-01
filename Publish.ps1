@@ -17,6 +17,6 @@ if($null -eq $sas){
     $sas = Get-Credential -Message "Specify a shared access signature to use for publishing. (Token should begin with sv=)" -username "NA"
 }
 $source="$PSScriptRoot\src"
-$destination = "https://jonsastro.blob.core.windows.net/`$web/PatchworkOrion/v1/?$($sas.GetNetworkCredential().Password.TrimStart('?'))"
+$destination = "https://jonsastro.blob.core.windows.net/`$web/OrionMosaic/v1/?$($sas.GetNetworkCredential().Password.TrimStart('?'))"
 
 & $azcopy sync $source $destination --recursive
